@@ -9,7 +9,7 @@ import path from 'ramda/es/path'
 import React from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 
-const CSS_HANDLES = ['variants'] as const
+const CSS_HANDLES = ['variants','title', 'img'] as const
 
 const SimilarProductsVariants: StorefrontFunctionComponent<
   SimilarProductsVariantsProps
@@ -53,9 +53,15 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
         return (
           <div className={`${handles.variants}`}>
             {items.map(element => (
-              <a href={`/${element.linkText}/p`}>
-                <img height="50px" src={element.items[0].images[0].imageUrl} />
-              </a>
+              <div>
+                <p className={`${handles.variants}`}>Colores</p>
+                <a href={`/${element.linkText}/p`} className={`${handles.img}`}>
+                  <img
+                    height="50px"
+                    src={element.items[0].images[0].imageUrl}
+                  />
+                </a>
+              </div>
             ))}
           </div>
         )
