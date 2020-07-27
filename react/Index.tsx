@@ -54,7 +54,7 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
           <div className={`${handles.variants}`}>
             {items.map(element => (
               <div>
-                <p className={`${handles.variants}`}>Colores</p>
+                <p className={`${handles.title}`}>Colores</p>
                 <a href={`/${element.linkText}/p`} className={`${handles.img}`}>
                   <img
                     height="50px"
