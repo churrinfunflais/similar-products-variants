@@ -7,10 +7,14 @@ import { Query } from 'react-apollo'
 import productRecommendationsQuery from './queries/productRecommendations.gql'
 import path from 'ramda/es/path'
 import React from 'react'
+import { useCssHandles } from 'vtex.css-handles'
+
+const CSS_HANDLES = ['variants'] as const
 
 const SimilarProductsVariants: StorefrontFunctionComponent<
   SimilarProductsVariantsProps
 > = ({ productQuery }) => {
+  const handles = useCssHandles(CSS_HANDLES)
   const productContext = useProduct()
 
   const productId =
@@ -46,11 +50,15 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
 
         console.log('similar-products:', items)
 
-        return items.map(element => (
-          <a href={`/${element.linkText}/p`}>
-            <img height="50px" src={element.items[0].images[0].imageUrl} />
-          </a>
-        ))
+        return (
+          <div className={`${handles.variants}`}>
+            {items.map(element => (
+              <a href={`/${element.linkText}/p`}>
+                <img height="50px" src={element.items[0].images[0].imageUrl} />
+              </a>
+            ))}
+          </div>
+        )
       }}
     </Query>
   )
