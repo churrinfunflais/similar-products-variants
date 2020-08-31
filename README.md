@@ -27,7 +27,7 @@ vtex install vtex.similar-products-variants
       "product-separator",
       "product-identifier.product",
       "sku-selector",
-+     "similar-products-variants",
++ "similar-products-variants",
       "product-quantity",
       "link-seller",
       "product-availability",
