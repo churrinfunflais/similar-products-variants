@@ -23,6 +23,7 @@ vtex install vtex.similar-products-variants
 Add the similar-products-variants block to the store theme template where you desire to display a similar product list. For example:
 
 ```json
+...
   "flex-layout.col#right-col": {
     "props": {
       "preventVerticalStretch": true,
@@ -49,6 +50,7 @@ Add the similar-products-variants block to the store theme template where you de
       "share#default"
     ]
   },
+...
 ```
 
 *Notice that this block depends on the product context, so its recomended to declare it inside the product page contex.*
