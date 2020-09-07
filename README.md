@@ -40,7 +40,7 @@ Add the similar-products-variants block to the store theme template where you de
       "product-separator",
       "product-identifier.product",
       "sku-selector",
-      "similar-products-variants",
+    + "similar-products-variants",
       "product-quantity",
       "link-seller",
       "product-availability",
@@ -55,7 +55,7 @@ Add the similar-products-variants block to the store theme template where you de
 ...
 ```
 
-*Notice that this block depends on the product context, so its recomended to declare it inside the product page contex.*
+*Notice that this block depends on the product context, so its recomended to declare it inside the product page contex. If the SKU desent have any similar product configured on the catalog the component wont render aanything.*
 
 ## Customization
 
