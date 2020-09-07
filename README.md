@@ -2,6 +2,8 @@
 
 Return the similar products related to the sku
 
+![Image](https://github.com/churrinfunflais/similar-products-variants/blob/master/public/metadata/Sample.png)
+
 ## Configuration
 
 1. Use the vtex toolbelt to install.
