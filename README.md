@@ -2,17 +2,30 @@
 
 Return the similar products related to the sku
 
-## Installation
+![Image](https://github.com/churrinfunflais/similar-products-variants/blob/master/public/metadata/Sample.png)
 
-Use the vtex toolbelt to install.
+## Configuration
+
+1. Use the vtex toolbelt to install.
 
 ```bash
 vtex install vtex.similar-products-variants
 ```
 
+2. Import the vtex.similar-products-variants app to your theme's dependencies in the manifest.json
+
+```json
+"dependencies": {
+    "vtex.similar-products-variants"
+}
+```
+
 ## Usage
 
-```ts
+Add the similar-products-variants block to the store theme template where you desire to display a similar product list. For example:
+
+```json
+...
   "flex-layout.col#right-col": {
     "props": {
       "preventVerticalStretch": true,
@@ -27,7 +40,7 @@ vtex install vtex.similar-products-variants
       "product-separator",
       "product-identifier.product",
       "sku-selector",
-+     "similar-products-variants",
+    + "similar-products-variants",
       "product-quantity",
       "link-seller",
       "product-availability",
@@ -39,7 +52,10 @@ vtex install vtex.similar-products-variants
       "share#default"
     ]
   },
+...
 ```
+
+*Notice that this block depends on the product context, so its recomended to declare it inside the product page contex. If the SKU doesn't have any similar product configured on the catalog the component wont render anything.*
 
 ## Customization
 
@@ -52,7 +68,3 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `var-wrap`                 |
 | `img_wrap`                 |
 | `img`                      |
-
-## Props
-
-N/A
