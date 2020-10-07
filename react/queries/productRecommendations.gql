@@ -4,26 +4,8 @@ query ProductRecommendations(
 ) {
   productRecommendations(identifier: $identifier, type: $type)
     @context(provider: "vtex.search-graphql") {
-    cacheId
     productId
-    productName
-    productReference
-    description
-    link
     linkText
-    brand
-    brandId
-    categories
-    priceRange {
-      sellingPrice {
-        highPrice
-        lowPrice
-      }
-      listPrice {
-        highPrice
-        lowPrice
-      }
-    }
     specificationGroups {
       name
       originalName
@@ -33,69 +15,15 @@ query ProductRecommendations(
         values
       }
     }
-    skuSpecifications {
-      field {
-        name
-        originalName
-      }
-      values {
-        name
-        originalName
-      }
-    }
     items {
-      name
-      itemId
-      measurementUnit
-      unitMultiplier
-      referenceId {
-        Value
-      }
       images {
-        imageId
         imageLabel
-        imageTag
         imageUrl
-        imageText
       }
       variations {
         name
         values
       }
-      sellers {
-        sellerId
-        sellerName
-        addToCartLink
-        sellerDefault
-        commertialOffer {
-          Installments(criteria: MAX) {
-            Value
-            InterestRate
-            TotalValuePlusInterestRate
-            NumberOfInstallments
-            Name
-          }
-          Price
-          ListPrice
-          PriceWithoutDiscount
-          RewardValue
-          PriceValidUntil
-          AvailableQuantity
-          Tax
-          taxPercentage
-          CacheVersionUsedToCallCheckout
-          teasers {
-            name
-          }
-          discountHighlights {
-            name
-          }
-        }
-      }
-    }
-    properties {
-      name
-      values
     }
   }
 }

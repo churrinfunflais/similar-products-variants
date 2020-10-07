@@ -9,7 +9,7 @@ import path from 'ramda/es/path'
 import React from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 
-const CSS_HANDLES = ['variants','title', 'img'] as const
+const CSS_HANDLES = ['variants', 'title', 'var-wrap', 'img_wrap', 'img'] as const
 
 const SimilarProductsVariants: StorefrontFunctionComponent<
   SimilarProductsVariantsProps
@@ -30,8 +30,7 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
       }}
     >
       {({ loading, error, data }: any) => {
-        if (loading) return 'Loading...'
-        if (error) return `Error! ${error.message}`
+        if (loading || error) return null
 
         const { productRecommendations } = data
 
@@ -39,30 +38,49 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
           products: productRecommendations || [],
         }
 
-        const items = [...products].filter(product =>
-          product.specificationGroups.filter(
-            (group: { specifications: any[] }) =>
-              group.specifications.filter(
-                (spec: { name: string }) => spec.name == 'Color'
-              )
-          )
-        )
+        const unique = [...new Set(products.map((item: any) => item.productId))]
 
-        console.log('similar-products:', items)
+        let items: any[] = []
+
+        unique.forEach(id => {
+          const item = products.find(
+            (element: { productId: any }) => element.productId == id
+          )
+
+          if (item) items.push(item)
+        })
 
         return (
           <div className={`${handles.variants}`}>
-            {items.map(element => (
-              <div>
-                <p className={`${handles.title}`}>Colores</p>
-                <a href={`/${element.linkText}/p`} className={`${handles.img}`}>
-                  <img
-                    height="50px"
-                    src={element.items[0].images[0].imageUrl}
-                  />
-                </a>
-              </div>
-            ))}
+            <p className={`${handles.title}`}>Colores</p>
+            <div className={`${handles.var_wrap}`}>
+              {items.map(
+                (element: {
+                  linkText: any
+                  items: { images: { imageUrl: string | undefined }[] }[]
+                }) => (
+                    <a className={`${handles.img_wrap}${
+                      window.location.href.indexOf(
+                        encodeURI(element.linkText)
+                      ) !== -1
+                        ? '--is-active'
+                        : ''
+                      }`} href={`/${element.linkText}/p`}>
+                      <img
+                        height="50px"
+                        className={`${handles.img} mr3 ${
+                          window.location.href.indexOf(
+                            encodeURI(element.linkText)
+                          ) !== -1
+                            ? 'o-50'
+                            : ''
+                          }`}
+                        src={element.items[0].images[0].imageUrl}
+                      />
+                    </a>
+                  )
+              )}
+            </div>
           </div>
         )
       }}
