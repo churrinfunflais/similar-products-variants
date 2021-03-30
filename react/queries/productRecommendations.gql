@@ -1,9 +1,5 @@
-query ProductRecommendations(
-  $identifier: ProductUniqueIdentifier
-  $type: CrossSelingInputEnum
-) {
-  productRecommendations(identifier: $identifier, type: $type)
-    @context(provider: "vtex.search-graphql") {
+query ProductRecommendations($identifier: ProductUniqueIdentifier, $type: CrossSelingInputEnum) {
+  productRecommendations(identifier: $identifier, type: $type) @context(provider: "vtex.search-graphql") {
     productId
     linkText
     specificationGroups {

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import React from 'react'
 import { injectIntl } from 'react-intl'
 import { SimilarProductsVariantsProps } from './typings/global'
 
@@ -6,7 +7,6 @@ import { useProduct } from 'vtex.product-context'
 import { Query } from 'react-apollo'
 import productRecommendationsQuery from './queries/productRecommendations.gql'
 import path from 'ramda/es/path'
-import React from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 
 const CSS_HANDLES = ['variants', 'title', 'var-wrap', 'img_wrap', 'img'] as const
@@ -56,29 +56,27 @@ const SimilarProductsVariants: StorefrontFunctionComponent<
             <div className={`${handles.var_wrap}`}>
               {items.map(
                 (element: {
+                  productId: string
                   linkText: any
                   items: { images: { imageUrl: string | undefined }[] }[]
-                }) => (
-                    <a className={`${handles.img_wrap}${
-                      window.location.href.indexOf(
-                        encodeURI(element.linkText)
-                      ) !== -1
+                }) => {
+                  return (
+                    <a href={`/${element.linkText}/p`} className={`${handles.img_wrap}${
+                      element.productId == productContext.product.productId
                         ? '--is-active'
                         : ''
-                      }`} href={`/${element.linkText}/p`}>
-                      <img
+                      }`}>
+                      <img src={element.items[0].images[0].imageUrl}
                         height="50px"
                         className={`${handles.img} mr3 ${
-                          window.location.href.indexOf(
-                            encodeURI(element.linkText)
-                          ) !== -1
+                          element.productId == productContext.product.productId
                             ? 'o-50'
                             : ''
                           }`}
-                        src={element.items[0].images[0].imageUrl}
                       />
                     </a>
                   )
+                }
               )}
             </div>
           </div>
